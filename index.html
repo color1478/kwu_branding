@@ -46,15 +46,15 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img id = "mainimg" src="images/padong.png" alt="#" /></a>
+                              <a href="index.html"><img id="mainimg" src="images/padong.png" alt="#" /></a>
                            </div>
                         </div>
                      </div>
                   </div>
                   <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                           <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarsExample04">
                            <ul class="navbar-nav mr-auto">
@@ -65,23 +65,18 @@
                                  <a class="nav-link" href="about.html">About</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="product.html">product</a>
+                                 <a class="nav-link" href="product.html">Product</a>
                               </li>
                               <li class="nav-item">
-                                 <a class="nav-link" href="order.html">order</a>
+                                 <a class="nav-link" href="order.html">Order</a>
                               </li>
-                              <!-- <li class="nav-item">
-                                 <a class="nav-link" href="contact.html">Contact Us</a>
-                              </li> -->
-                              <!-- <li class="nav-item d_none login_btn">
-                                 <a class="nav-link" href="#">Login</a>
-                              </li> -->
                               <li class="nav-item">
                                  <a class="nav-link" href="https://www.instagram.com/kwu_studentcouncil/">FAQ</a>
                               </li>
-                              <!-- <li class="nav-item d_none sea_icon">
-                                 <a class="nav-link" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i><i class="fa fa-search" aria-hidden="true"></i></a>
-                              </li> -->
+                              <li class="nav-item d_none login_btn">
+                                 <!-- Login button triggers modal -->
+                                 <a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+                              </li>
                            </ul>
                         </div>
                      </nav>
@@ -90,6 +85,35 @@
             </div>
          </div>
       </header>
+      
+      <!-- Login Modal -->
+      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border-radius: 20px; padding: 20px; background: #fff;">
+               <div class="modal-header" style="border-bottom: none; text-align: center; display: block;">
+                  <h5 class="modal-title" id="loginModalLabel" style="font-size: 24px; color: #2a2a2c;">로그인</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background: transparent; border: none;">
+                     <span aria-hidden="true" style="font-size: 24px;">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form id="loginForm">
+                     <div class="form-group">
+                        <label for="adminId" style="font-size: 16px; color: #4b4b4c;">아이디</label>
+                        <input type="text" class="form-control contactus" id="adminId" placeholder="아이디 입력" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="adminPassword" style="font-size: 16px; color: #4b4b4c;">비밀번호</label>
+                        <input type="password" class="form-control contactus" id="adminPassword" placeholder="비밀번호 입력" required>
+                     </div>
+                     <button type="submit" class="btn send_btn" style="margin-top: 20px;">로그인</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      
       <!-- end header inner -->
       <!-- end header -->
       <!-- banner -->
@@ -116,8 +140,8 @@
                   <div class="container">
                      <div class="carousel-caption">
                         <div class="text-bg">
-                           <h1> <span class="blu">상품명 <br></span>2번 상품</h1>
-                           <figure><img src="images/banner_2.jpg" alt="#"/></figure>
+                           <h1> <span class="blu">보조배터리 <br></span>4색 광운로고 보조배터리</h1>
+                           <figure><img src="images/banner_img_1.png" alt="#"/></figure>
                            <a class="read_more" href="#">order now</a>
                         </div>
                      </div>
@@ -127,7 +151,7 @@
                   <div class="container">
                      <div class="carousel-caption">
                         <div class="text-bg">
-                           <h1> <span class="blu">상품명 <br></span>3번 상품</h1>
+                           <h1> <span class="blu">스티커 <br></span>3번 상품</h1>
                            <figure><img src="images/banner_img.png" alt="#"/></figure>
                            <a class="read_more" href="#">order now</a>
                         </div>
@@ -144,26 +168,6 @@
          </div>
       </section>
       <!-- end banner -->
-      <!-- about section -->
-      <div class="about">
-         <div class="container">
-            <!--div class="row d_flex">
-               <div class="col-md-5">
-                  <div class="about_img">
-                     <figure><img src="#" alt="상품 대표 이미지"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-7">
-                  <div class="titlepage">
-                     <h2>광운대학교 브랜딩 사업</h2>
-                     <p>학령인구 감소 등에 따라 대학 경쟁력이 중요해지는 지금, 많은 대학들에서는 본교의 브랜드 이미지를 구축하기 위하여 노력 중에 있습니다. 광운대학교 굿즈 사업은 광운대학교 총학생회 "파동" 진행하는 교내 브랜딩 사업의 일환으로써 단순한 기념품 판매의 의미를 넘어 학교를 홍보하고, 나아가 대학을 교육기관이 아닌 다양한 분야에서 하나의 브랜드로써 입지를 다지는 역할을 할 것입니다. 여러분은 기념품을 구입하고, 이를 사용함으로써 함께 학교를 홍보하는 활동에 참여할 수 있을 것입니다. 많은 관심과 사랑 부탁드립니다.</p>
-                  </div>
-                  <a class="read_more" href="#">Read More</a>
-               </div>
-            </div-->
-         </div>
-      </div>
-      <!-- about section -->
       <!-- Our  Glasses section -->
       <div class="glasses">
          <div class="container">
@@ -242,29 +246,6 @@
             </div>
          </div>
       </div>
-      <!-- end Our  Glasses section -->
-      <!-- Our shop section -->
-      <!-- <div id="about" class="shop">
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-md-5">
-                  <div  class="shop_img">
-                     <figure><img src="images/shop_img.png" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-7 padding_right0">
-                  <div class="max_width">
-                     <div class="titlepage">
-                        <h2>Best SunGlasses  At Our shop</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                        <a class="read_more" href="#">Shop Now</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div> -->
-      <!-- end Our shop section -->
       <!-- clients section -->
       <div class="clients">
          <div class="container">
@@ -290,7 +271,7 @@
                                  <div class="row">
                                     <div class="col-md-12">
                                        <div class="clients_box">
-                                          <figure><img src="images/pang_01.png" alt="#"/></figure>
+                                          <figure><img src="images/uni_02.png" alt="#"/></figure>
                                           <h3>총학생회장 김준세</h3>
                                           <p>브랜딩 사업의 한마디 브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디브랜딩 사업의 한마디 한마디브랜딩 사업의 한마디한마디브랜딩 사업의 한마디한마디브랜딩 사업의 한마디</p>
                                        </div>
@@ -326,46 +307,7 @@
             </div>
          </div>
       </div>
-      <!-- end clients section -->
-      <!-- contact section -->
-      <!-- <div id="contact" class="contact">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <form id="request" class="main_form">
-                     <div class="row">
-                        <div class="col-md-12 ">
-                           <h3>Contact Us</h3>
-                        </div>
-                        <div class="col-md-12 ">
-                           <input class="contactus" placeholder="Name" type="type" name="Name"> 
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number"> 
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactus" placeholder="Email" type="type" name="Email">                          
-                        </div>
-                        <div class="col-md-12">
-                           <input class="contactusmess" placeholder="Message" type="type" Message="Name">
-                        </div>
-                        <div class="col-md-12">
-                           <button class="send_btn">Send</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-         <div class="container-fluid">
-            <div class="map_section">
-               <div id="map">
-               </div>
-            </div>
-         </div>
-      </div>
-      </div> -->
-      <!-- end contact section -->
+
       <!--  footer -->
       <footer>
          <div class="footer">
@@ -375,7 +317,7 @@
                      <ul class="location_icon">
                         <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a><br>광운대학교 복지관 301호</li>
                         <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a><br> 카카오 오픈채팅</li>
-                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a><br> 2024kwuwave@gmail.com</li>
+                        <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a><br> kwuwave2024@gmail.com</li>
                      </ul>
                   </div>
                </div>
@@ -400,6 +342,7 @@
       <!-- sidebar -->
       <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/custom.js"></script>
+      <script src="js/login.js"></script>
    </body>
 </html>
 
