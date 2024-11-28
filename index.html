@@ -28,6 +28,16 @@
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <!-- Firebase SDKs -->
+      <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>   
+
+      <!-- Your login.js -->
+      <script src="js/login.js"></script>
+
    </head>
    <!-- body -->
    <body class="main-layout">
@@ -129,9 +139,9 @@
                   <div class="container">
                      <div class="carousel-caption">
                         <div class="text-bg">
-                           <h1> <span class="blu">키링  <br></span>우니 6종세트 키링</h1>
+                           <h1> <span class="blu">아크릴 키링  <br></span>우니 6종 아크릴 키링</h1>
                            <figure><img src="images/banner_img_1.png" alt="#"/></figure>
-                           <a class="read_more" href="#">order now</a>
+                           <a class="read_more" href="order.html">order now</a>
                         </div>
                      </div>
                   </div>
@@ -140,9 +150,9 @@
                   <div class="container">
                      <div class="carousel-caption">
                         <div class="text-bg">
-                           <h1> <span class="blu">보조배터리 <br></span>4색 광운로고 보조배터리</h1>
-                           <figure><img src="images/banner_img_1.png" alt="#"/></figure>
-                           <a class="read_more" href="#">order now</a>
+                           <h1> <span class="blu">맥세이프 보조배터리 <br></span>광운 맥세이프 보조배터리</h1>
+                           <figure><img src="images/banner_img_2.png" alt="#"/></figure>
+                           <a class="read_more" href="order.html">order now</a>
                         </div>
                      </div>
                   </div>
@@ -151,13 +161,47 @@
                   <div class="container">
                      <div class="carousel-caption">
                         <div class="text-bg">
-                           <h1> <span class="blu">스티커 <br></span>3번 상품</h1>
-                           <figure><img src="images/banner_img.png" alt="#"/></figure>
-                           <a class="read_more" href="#">order now</a>
+                           <h1> <span class="blu">소주잔 <br></span> 3종 세트 우니&신규 슬로건 소주잔</h1>
+                           <figure><img src="images/banner_img_3.png" alt="#"/></figure>
+                           <a class="read_more" href="order.html">order now</a>
                         </div>
                      </div>
                   </div>
                </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="carousel-caption">
+                        <div class="text-bg">
+                           <h1> <span class="blu">인형 <br></span>우니 인형</h1>
+                           <figure><img src="images/banner_img_4.png" alt="#"/></figure>
+                           <a class="read_more" href="order.html">order now</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="carousel-caption">
+                        <div class="text-bg">
+                           <h1> <span class="blu">띠부띠부씰 <br></span>크리스마스 우니 띠부띠부씰</h1>
+                           <figure><img src="images/banner_img_5.png" alt="#"/></figure>
+                           <a class="read_more" href="order.html">order now</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="carousel-caption">
+                        <div class="text-bg">
+                           <h1> <span class="blu">판스티커 <br></span>2가지 버전 판스티커</h1>
+                           <figure><img src="images/banner_img_6.png" alt="#"/></figure>
+                           <a class="read_more" href="order.html">order now</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
             </div>
             <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -175,8 +219,7 @@
                <div class="col-md-10 offset-md-1">
                   <div class="titlepage">
                      <h2>전체 상품 미리 보기</h2>
-                     <p>상품들은 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고 <br>
-                        광운대학교 51대 총학생회 파동 브랜딩 사업 어쩌고 저쩌고
+                     <p> 주문하기 창으로 이동하여 구매를 진행할 수 있습니다
                      </p>
                   </div>
                </div>
@@ -184,64 +227,64 @@
          </div>
          <div class="container-fluid">
             <div class="row">
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+               <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                   <div class="glasses_box">
                      <figure><img class = "product_detail" src="images/키링1.png" alt="#"/></figure>
-                     <h3><span class="blu">&#x20a9;</span> 12,000</h3>
-                     <p>키링 1</p>
+                     <h3><span class="blu">&#x20a9;</span> 3,000</h3>
+                     <p>아크릴 키링 ver 1</p>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+               <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                   <div class="glasses_box">
                      <figure><img class = "product_detail" src="images/키링2.png" alt="#"/></figure>
-                     <h3><span class="blu">&#x20a9;</span> 5,000</h3>
-                     <p>키링 2</p>
+                     <h3><span class="blu">&#x20a9;</span> 3,000</h3>
+                     <p>아크릴 키링 ver 2</p>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+               <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                   <div class="glasses_box">
                      <figure><img class = "product_detail" src="images/키링3.png" alt="#"/></figure>
-                     <h3><span class="blu">&#x20a9;</span>2,000</h3>
-                     <p>키링 3</p>
+                     <h3><span class="blu">&#x20a9;</span> 3,000</h3>
+                     <p>아크릴 키링 ver 3</p>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+               <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                   <div class="glasses_box">
                      <figure><img class = "product_detail" src="images/키링4.png" alt="#"/></figure>
-                     <h3><span class="blu">&#x20a9;</span> 15,000</h3>
-                     <p>키링 4</p>
+                     <h3><span class="blu">&#x20a9;</span> 3,000</h3>
+                     <p>아크릴 키링 ver 4</p>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+               <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                   <div class="glasses_box">
-                     <figure><img class = "product_detail" src="images/키링5.png" alt="#"/></figure>
-                     <h3><span class="blu">&#x20a9;</span>99,999</h3>
-                     <p>키링 5</p>
+                     <figure><img class = "product_detail" src="images/battery_1.png" alt="#"/></figure>
+                     <h3><span class="blu">&#x20a9;</span> 24,000</h3>
+                     <p>맥세이프 보조배터리</p>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+               <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                   <div class="glasses_box">
-                     <figure><img class = "product_detail" src="images/키링6.png" alt="#"/></figure>
-                     <h3><span class="blu">&#x20a9;</span>10,000</h3>
-                     <p>키링 6</p>
+                     <figure><img class = "product_detail" src="images/dool_1.png" alt="#"/></figure>
+                     <h3><span class="blu">&#x20a9;</span> 20,000</h3>
+                     <p>우니 인형</p>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+               <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                   <div class="glasses_box">
-                     <figure><img class = "product_detail" src="images/스티커1.jpg" alt="#"/></figure>
-                     <h3><span class="blu">&#x20a9;</span>500</h3>
-                     <p>스티커 1</p>
+                     <figure><img class = "product_detail" src="images/sti_1.png" alt="#"/></figure>
+                     <h3><span class="blu">&#x20a9;</span> 3,000</h3>
+                     <p>판스티커</p>
                   </div>
                </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+               <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
                   <div class="glasses_box">
-                     <figure><img class = "product_detail" src="images/스티커1.jpg" alt="#"/></figure>
-                     <h3><span class="blu">&#x20a9;</span> 30,000</h3>
-                     <p>스티커 2</p>
+                     <figure><img class = "product_detail" src="images/cup_1.png" alt="#"/></figure>
+                     <h3><span class="blu">&#x20a9;</span> 8,000</h3>
+                     <p>소주잔 3가지 세트</p>
                   </div>
                </div>
                <div class="col-md-12">
-                  <a class="read_more" href="#">Read More</a>
+                  <a class="read_more" href="product.html">Read More</a>
                </div>
             </div>
          </div>
@@ -252,8 +295,8 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <h2>Why did we start</h2>
-                     <p>왜 이 브랜딩 사업을 시작 했는가 왜 이 브랜딩 사업을 시작 했는가 왜 이 브랜딩 사업을 시작 했는가</p>
+                     <h2>why we started</h2>
+                     <p>51대 총학생회 파동 브랜딩 사업</p>
                   </div>
                </div>
             </div>

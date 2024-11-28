@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문하기</title>
+    <link rel="stylesheet" href="./css/order_detail.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>   
+    
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyD622KXV5yG9sdZcwpleL2Fq8MrntAWpPw",
+            authDomain: "kwubranding.firebaseapp.com",
+            projectId: "kwubranding",
+            storageBucket: "kwubranding.firebasestorage.app",
+            messagingSenderId: "901618759014",
+            appId: "1:901618759014:web:e8777f040b5063865b44a7",
+            measurementId: "G-0V6YBCMPNK"
+        };
+        firebase.initializeApp(firebaseConfig); 
+        var db = firebase.firestore();
+    </script>
+
+    <script src="./js/order_detail.js" defer></script>
+</head>
+<body>
+    <div class="order-container">
+        <h1>🛒 주문하기</h1>
+        <!-- 구매자 정보 입력 -->
+        <div class="buyer-info">
+            <div class="form-group">
+                <label for="buyerName">이름</label>
+                <input type="text" id="buyerName" placeholder="이름을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="buyerPhone">전화번호</label>
+                <input type="text" id="buyerPhone" placeholder="전화번호를 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="buyerId">학번</label>
+                <input type="text" id="buyerId" placeholder="학번을 입력하세요">
+            </div>
+        </div>
+
+        <!-- 상품 리스트 -->
+        <div class="product-list-grid">
+            <div class="product-item" data-price="3000">
+                <div class="product-details">
+                    <p class="product-name">아크릴 키링 ver 1</p>
+                    <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="3000">
+                <div class="product-details">
+                    <p class="product-name">아크릴 키링 ver 2</p>
+                    <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="3000">
+                <div class="product-details">
+                    <p class="product-name">아크릴 키링 ver 3</p>
+                    <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="3000">
+                <div class="product-details">
+                    <p class="product-name">아크릴 키링 ver 4</p>
+                    <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="24000">
+                <div class="product-details">
+                    <p class="product-name">맥세이프 보조배터리</p>
+                    <p class="product-price">₩24,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="20000">
+                <div class="product-details">
+                    <p class="product-name">우니 인형</p>
+                    <p class="product-price">₩20,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="3000">
+                <div class="product-details">
+                    <p class="product-name">판스티커</p>
+                    <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="8000">
+                <div class="product-details">
+                    <p class="product-name">소주잔 3가지 세트</p>
+                    <p class="product-price">₩8,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+        </div>
+        
+
+        <!-- 총 금액 -->
+        <div class="total-price">
+            <h2>총 금액: ₩<span id="totalAmount">0</span></h2>
+        </div>
+
+        <!-- 액션 버튼 -->
+        <div class="action-buttons">
+            <button id="reviewOrder">주문 내역 확인하기</button>
+            <button id="backButton" class="secondary-button">뒤로 가기</button>
+        </div>
+    </div>
+
+    <!-- 주문 내역 확인 모달 -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>주문 내역</h2>
+            <div id="orderSummary"></div>
+            <h3>최종 금액: ₩<span id="finalAmount">0</span></h3>
+            <div id="buyerDetails"></div>
+            <p class="account-details">계좌 이체 : <strong>0000-000-000000</strong><br>송금 후 확인까지 2~3일 소요될 수 있습니다.</p>
+            <button id="confirmButton" class="secondary-button">확인하였습니다</button>
+        </div>
+    </div>
+
+
+</body>
+</html>

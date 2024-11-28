@@ -1,0 +1,52 @@
+{
+    "products": [
+        {
+            "name": "키링 1",
+            "price": "12,000",
+            "image": "images/키링1.png",
+            "description": "키링 1은 광운대학교의 대표 굿즈로, 학생들이 애용하는 인기 아이템입니다."
+        },
+        {
+            "name": "키링 2",
+            "price": "5,000",
+            "image": "images/키링2.png",
+            "description": "키링 2는 심플하고 귀여운 디자인으로 일상에서 사용하기 좋은 제품입니다."
+        },
+        {
+            "name": "키링 3",
+            "price": "2,000",
+            "image": "images/키링3.png",
+            "description": "키링 3은 저렴한 가격대와 실용성으로 많은 사랑을 받고 있습니다."
+        },
+        {
+            "name": "키링 4",
+            "price": "15,000",
+            "image": "images/키링4.png",
+            "description": "키링 4는 고급스러운 디자인과 높은 품질을 자랑합니다."
+        },
+        {
+            "name": "키링 5",
+            "price": "99,999",
+            "image": "images/키링5.png",
+            "description": "키링 5는 특별한 날을 기념하기 위한 한정판 제품입니다."
+        },
+        {
+            "name": "키링 6",
+            "price": "10,000",
+            "image": "images/키링6.png",
+            "description": "키링 6은 다양한 색상 옵션과 세련된 디자인으로 인기가 많습니다."
+        },
+        {
+            "name": "스티커 1",
+            "price": "500",
+            "image": "images/스티커1.jpg",
+            "description": "스티커 1은 노트북, 텀블러 등 다양한 곳에 부착할 수 있는 귀여운 아이템입니다."
+        },
+        {
+            "name": "스티커 2",
+            "price": "30,000",
+            "image": "images/스티커2.jpg",
+            "description": "스티커 2는 대형 사이즈로 특별한 디자인을 선호하는 고객에게 추천드립니다."
+        }
+    ]
+}
