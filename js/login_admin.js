@@ -30,7 +30,7 @@ $(document).ready(function () {
                 console.log('로그인 성공:', user);
 
                 // 대시보드로 이동
-                window.location.href = 'dashboard.html';
+                window.location.href = './dashboard.html';
             })
             .catch((error) => {
                 console.error('로그인 실패:', error);
