@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1000">
     <title>주문하기</title>
     <link rel="stylesheet" href="./css/order_detail.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -28,6 +28,13 @@
 
     <script src="./js/order_detail.js" defer></script>
 </head>
+
+<style>
+    img {
+        height: 100px;
+        
+    }
+</style>
 <body>
     <div class="order-container">
         <h1>🛒 주문하기</h1>
@@ -49,9 +56,11 @@
 
         <!-- 상품 리스트 -->
         <div class="product-list-grid">
+            <!-- 아크릴 키링 -->
             <div class="product-item" data-price="3000">
                 <div class="product-details">
-                    <p class="product-name">아크릴 키링 ver 1</p>
+                    <img src="images/키링2.png" alt="아크릴 키링 *루돌프 우니">
+                    <p class="product-name">아크릴 키링 <br> *루돌프 우니</p>
                     <p class="product-price">₩3,000</p>
                     <input type="number" class="quantity" min="0" value="0">
                 </div>
@@ -59,7 +68,8 @@
             </div>
             <div class="product-item" data-price="3000">
                 <div class="product-details">
-                    <p class="product-name">아크릴 키링 ver 2</p>
+                    <img src="images/키링4.png" alt="아크릴 키링 *붕어빵 우니">
+                    <p class="product-name">아크릴 키링 <br> *붕어빵 우니</p>
                     <p class="product-price">₩3,000</p>
                     <input type="number" class="quantity" min="0" value="0">
                 </div>
@@ -67,7 +77,8 @@
             </div>
             <div class="product-item" data-price="3000">
                 <div class="product-details">
-                    <p class="product-name">아크릴 키링 ver 3</p>
+                    <img src="images/키링1.png" alt="아크릴 키링 *선물 우니">
+                    <p class="product-name">아크릴 키링 <br> *선물 우니</p>
                     <p class="product-price">₩3,000</p>
                     <input type="number" class="quantity" min="0" value="0">
                 </div>
@@ -75,45 +86,143 @@
             </div>
             <div class="product-item" data-price="3000">
                 <div class="product-details">
-                    <p class="product-name">아크릴 키링 ver 4</p>
+                    <img src="images/키링5.png" alt="아크릴 키링 *날개 우니">
+                    <p class="product-name">아크릴 키링 <br> *날개 우니</p>
                     <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="3000">
+                <div class="product-details">
+                    <img src="images/키링3.png" alt="아크릴 키링 *귤 우니">
+                    <p class="product-name">아크릴 키링 <br> *귤 우니</p>
+                    <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="3000">
+                <div class="product-details">
+                    <img src="images/키링6.png" alt="아크릴 키링 *마법사 우니">
+                    <p class="product-name">아크릴 키링 <br> *마법사 우니</p>
+                    <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+        
+            <!-- 맥세이프 보조배터리 -->
+            <div class="product-item" data-price="24000">
+                <div class="product-details">
+                    <img src="images/sub_battery.png" alt="맥세이프 보조배터리 *실버">
+                    <p class="product-name">맥세이프 보조배터리<br> *실버</p>
+                    <p class="product-price">₩24,000</p>
                     <input type="number" class="quantity" min="0" value="0">
                 </div>
                 <p class="item-total"></p>
             </div>
             <div class="product-item" data-price="24000">
                 <div class="product-details">
-                    <p class="product-name">맥세이프 보조배터리</p>
+                    <img src="images/sub_battery.png" alt="맥세이프 보조배터리 *블루">
+                    <p class="product-name">맥세이프 보조배터리<br> *블루</p>
                     <p class="product-price">₩24,000</p>
                     <input type="number" class="quantity" min="0" value="0">
                 </div>
                 <p class="item-total"></p>
             </div>
+            <div class="product-item" data-price="24000">
+                <div class="product-details">
+                    <img src="images/sub_battery.png" alt="맥세이프 보조배터리 *블랙">
+                    <p class="product-name">맥세이프 보조배터리<br> *블랙</p>
+                    <p class="product-price">₩24,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="24000">
+                <div class="product-details">
+                    <img src="images/sub_battery.png" alt="맥세이프 보조배터리 *그레이">
+                    <p class="product-name">맥세이프 보조배터리<br> *그레이</p>
+                    <p class="product-price">₩24,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+        
+            <!-- 우니 인형 -->
             <div class="product-item" data-price="20000">
                 <div class="product-details">
-                    <p class="product-name">우니 인형</p>
+                    <img src="images/dool_1.png" alt="우니 인형">
+                    <p class="product-name">우니 인형<br></p>
                     <p class="product-price">₩20,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+        
+            <!-- 판스티커 -->
+            <div class="product-item" data-price="3000">
+                <div class="product-details">
+                    <img src="images/스티커1.jpg" alt="판스티커 *캠퍼스 라이프 에디션">
+                    <p class="product-name">판스티커<br>*캠퍼스 라이프 에디션</p>
+                    <p class="product-price">₩3,000</p>
                     <input type="number" class="quantity" min="0" value="0">
                 </div>
                 <p class="item-total"></p>
             </div>
             <div class="product-item" data-price="3000">
                 <div class="product-details">
-                    <p class="product-name">판스티커</p>
+                    <img src="images/스티커2.jpg" alt="판스티커 *크리스마스 에디션">
+                    <p class="product-name">판스티커<br>*크리스마스 에디션</p>
                     <p class="product-price">₩3,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+        
+            <!-- 띠부띠부씰 -->
+            <div class="product-item" data-price="5000">
+                <div class="product-details">
+                    <img src="images/띠부.png" alt="띠부띠부씰">
+                    <p class="product-name">띠부띠부씰<br></p>
+                    <p class="product-price">₩5,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+        
+            <!-- 소주잔 세트 -->
+            <div class="product-item" data-price="8000">
+                <div class="product-details">
+                    <img src="images/슬로건술잔.png" alt="소주잔 세트 *광운대 로고&슬로건">
+                    <p class="product-name">소주잔 세트<br> *광운대 로고&슬로건</p>
+                    <p class="product-price">₩8,000</p>
                     <input type="number" class="quantity" min="0" value="0">
                 </div>
                 <p class="item-total"></p>
             </div>
             <div class="product-item" data-price="8000">
                 <div class="product-details">
-                    <p class="product-name">소주잔 3가지 세트</p>
+                    <img src="images/토끼우니술잔.png" alt="소주잔 세트 *토끼 우니">
+                    <p class="product-name">소주잔 세트<br>*토끼 우니</p>
+                    <p class="product-price">₩8,000</p>
+                    <input type="number" class="quantity" min="0" value="0">
+                </div>
+                <p class="item-total"></p>
+            </div>
+            <div class="product-item" data-price="8000">
+                <div class="product-details">
+                    <img src="images/산타우니술잔.png" alt="소주잔 세트 *겨울 우니">
+                    <p class="product-name">소주잔 세트<br>*겨울 우니</p>
                     <p class="product-price">₩8,000</p>
                     <input type="number" class="quantity" min="0" value="0">
                 </div>
                 <p class="item-total"></p>
             </div>
         </div>
+        
+        
         
 
         <!-- 총 금액 -->
@@ -136,7 +245,7 @@
             <div id="orderSummary"></div>
             <h3>최종 금액: ₩<span id="finalAmount">0</span></h3>
             <div id="buyerDetails"></div>
-            <p class="account-details">계좌 이체 : <strong>0000-000-000000</strong><br>송금 후 확인까지 2~3일 소요될 수 있습니다.</p>
+            <p class="account-details">계좌 이체 : <strong>110568433897 신한</strong><br>송금 후 확인까지 2~3일 소요될 수 있습니다.</p>
             <button id="confirmButton" class="secondary-button">확인하였습니다</button>
         </div>
     </div>

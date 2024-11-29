@@ -38,3 +38,21 @@ $(document).ready(function () {
             });
     });
 });
+
+// 우클릭 비활성화
+document.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+    alert('우클릭은 사용할 수 없습니다.');
+});
+
+// 특정 키 조합 방지 (F12, Ctrl+Shift+I, Ctrl+U 등)
+document.addEventListener('keydown', function (event) {
+    if (
+        event.key === 'F12' || // F12 키
+        (event.ctrlKey && event.shiftKey && event.key === 'I') || // Ctrl + Shift + I
+        (event.ctrlKey && event.key === 'U') // Ctrl + U
+    ) {
+        event.preventDefault();
+        alert('이 기능은 사용할 수 없습니다.');
+    }
+});

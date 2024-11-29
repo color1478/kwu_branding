@@ -27,8 +27,7 @@
                     <tr>
                         <th>구매자 이름</th>
                         <th>전화번호</th>
-                        <th>상품명</th>
-                        <th>수량</th>
+                        <th>품목 및 개수</th>
                         <th>상태</th>
                     </tr>
                 </thead>
@@ -54,50 +53,85 @@
         const db = firebase.firestore();
 
         $(document).ready(function () {
-            const purchaseTbody = $('#purchase-summary');
+        const purchaseTbody = $('#purchase-summary');
 
-            // Firestore 데이터 가져오기
-            db.collection('orders').get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const buyer = data.buyer;
-                    const products = data.products;
+        // Firestore 데이터 가져오기
+        db.collection('orders').get().then((querySnapshot) => {
+            const groupedOrders = {};
 
-                    products.forEach((product) => {
-                        const { name, quantity } = product;
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const { buyer, products, status, timestamp } = data;
 
-                        // 이름 마지막 글자만 남기고 * 처리
-                        const maskedName = buyer.name.slice(0, -1).replace(/./g, '*') + buyer.name.slice(-1);
+                // 이름 마지막 글자만 남기고 * 처리
+                const maskedName = buyer.name.slice(0, -1).replace(/./g, '*') + buyer.name.slice(-1);
 
-                        // 전화번호 뒤 4자리 제외 * 처리
-                        const maskedPhone = buyer.phone.slice(0, -4).replace(/./g, '*') + buyer.phone.slice(-4);
+                // 전화번호 뒤 4자리 제외 * 처리
+                const maskedPhone = buyer.phone.slice(0, -4).replace(/./g, '*') + buyer.phone.slice(-4);
 
-                        // 상태 정보 가져오기
-                        const statusBadge = `<span class="badge ${data.status === '입금 완료' ? 'badge-success' : 'badge-warning'}">${data.status}</span>`;
+                // 고유 키 생성 (이름, 전화번호, 구매 시간 기준)
+                const purchaseTime = new Date(timestamp).toLocaleString(); // 시간 변환
+                const key = `${maskedName}-${maskedPhone}-${purchaseTime}`;
 
-                        // 행 추가
-                        const row = `
-                            <tr>
-                                <td>${maskedName}</td>
-                                <td>${maskedPhone}</td>
-                                <td>${name}</td>
-                                <td>${quantity}</td>
-                                <td>${statusBadge}</td>
-                            </tr>
-                        `;
-                        purchaseTbody.append(row);
-                    });
+                // 그룹 데이터 초기화
+                if (!groupedOrders[key]) {
+                    groupedOrders[key] = {
+                        name: maskedName,
+                        phone: maskedPhone,
+                        purchaseTime: purchaseTime,
+                        products: [],
+                        status: status
+                    };
+                }
+
+                // 상품 정보를 포맷팅하여 추가
+                products.forEach((product) => {
+                    groupedOrders[key].products.push(`${product.name} x${product.quantity} (₩${product.price})`);
                 });
-            }).catch((error) => {
-                console.error('Firestore 데이터 로드 실패:', error);
-                alert('데이터를 불러오는 중 문제가 발생했습니다.');
             });
 
-            // 뒤로 가기 버튼 클릭 이벤트
-            $('#backButton').on('click', function () {
-                window.history.back(); // 이전 페이지로 이동
+            // 테이블에 데이터 추가
+            Object.values(groupedOrders).forEach((order) => {
+                const statusBadge = `<span class="badge ${order.status === '입금 완료' ? 'badge-success' : 'badge-warning'}">${order.status}</span>`;
+                const row = `
+                    <tr>
+                        <td>${order.name}</td>
+                        <td>${order.phone}</td>
+                        <td>${order.products.join('<br>')}</td>
+                        <td>${statusBadge}</td>
+                    </tr>
+                `;
+                purchaseTbody.append(row);
             });
+        }).catch((error) => {
+            console.error('Firestore 데이터 로드 실패:', error);
+            alert('데이터를 불러오는 중 문제가 발생했습니다.');
         });
+
+        // 뒤로 가기 버튼 클릭 이벤트
+        $('#backButton').on('click', function () {
+            window.history.back(); // 이전 페이지로 이동
+        });
+    });
+
+
+// 우클릭 비활성화
+    document.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+        alert('우클릭은 사용할 수 없습니다.');
+    });
+
+    // 특정 키 조합 방지 (F12, Ctrl+Shift+I, Ctrl+U 등)
+    document.addEventListener('keydown', function (event) {
+        if (
+            event.key === 'F12' || // F12 키
+            (event.ctrlKey && event.shiftKey && event.key === 'I') || // Ctrl + Shift + I
+            (event.ctrlKey && event.key === 'U') // Ctrl + U
+        ) {
+            event.preventDefault();
+            alert('이 기능은 사용할 수 없습니다.');
+        }
+    });
     </script>
 </body>
 </html>

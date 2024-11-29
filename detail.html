@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 상세 페이지</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .detail-header {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .detail-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        .detail-description {
+            margin: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="detail-header">
+        <h1 id="product-name"></h1>
+        <p id="product-summary"></p>
+    </header>
+
+    <main class="container">
+        <img id="detail-image" class="detail-image" src="" alt="제품 상세 이미지">
+        <div class="detail-description">
+            <h2>제품 설명</h2>
+            <p id="product-description"></p>
+            <h3 id="product-price"></h3>
+        </div>
+        <a href="product.html" class="btn btn-primary back-button">뒤로 가기</a>
+    </main>
+
+    <script>
+        // URL 파라미터로 제품명 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('product');
+
+        // 제품 상세 정보 데이터
+        const productDetails = {
+            '아크릴 키링': {
+                image: 'images/상세페이지/아크릴키링 상세페이지.png',
+                summary: '다양한 디자인의 아크릴 키링!',
+                description: '광운대학교 한정판 아크릴 키링입니다. 각 키링은 유니크한 디자인으로 구성되어 있습니다.',
+                price: '3,000원'
+            },
+            '띠부띠부씰': {
+                image: 'images/상세페이지/띠부띠부씰 상세페이지.png',
+                summary: '귀엽고 다양한 디자인의 띠부띠부씰!',
+                description: '광운대학교 한정판 띠부띠부씰! 총 10가지 캐릭터가 랜덤으로 구성되어 있습니다.',
+                price: '5,000원'
+            },
+            '맥세이프 보조배터리': {
+                image: 'images/상세페이지/보조배터리 상세페이지.png',
+                summary: '맥세이프 기능이 있는 보조배터리!',
+                description: '맥세이프 호환 보조배터리로, 4가지 색상 중 선택 가능합니다.',
+                price: '24,000원'
+            },
+            '소주잔 세트': {
+                image: 'images/상세페이지/소주잔 세트 상세페이지.png',
+                summary: '깔끔하고 귀여운 소주잔 세트!',
+                description: '광운대학교 한정 소주잔 세트로, 친구들과 함께 즐거운 시간을 보내세요.',
+                price: '8,000원'
+            },
+            '우니 인형': {
+                image: 'images/상세페이지/우니인형 상세페이지.png',
+                summary: '폭신폭신 귀여운 우니 인형!',
+                description: '광운대학교를 대표하는 귀여운 우니 인형입니다. 선물용으로도 최고!',
+                price: '20,000원'
+            },
+            '판스티커 에디션': {
+                image: 'images/상세페이지/판스티커 상세페이지.png',
+                summary: '다양한 캐릭터 스티커!',
+                description: '광운대학교 한정판 캐릭터 스티커 에디션으로, 다이어리와 노트 꾸미기에 적합합니다.',
+                price: '3,000원'
+            }
+        };
+
+        // 페이지에 데이터 적용
+        if (productDetails[productName]) {
+            document.getElementById('product-name').innerText = productName;
+            document.getElementById('product-summary').innerText = productDetails[productName].summary;
+            document.getElementById('detail-image').src = productDetails[productName].image;
+            document.getElementById('product-description').innerText = productDetails[productName].description;
+            document.getElementById('product-price').innerText = `가격: ${productDetails[productName].price}`;
+        } else {
+            document.getElementById('product-name').innerText = '제품 정보를 찾을 수 없습니다.';
+        }
+    </script>
+</body>
+</html>

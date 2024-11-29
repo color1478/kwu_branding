@@ -547,6 +547,13 @@ button {
      margin-top: 44px;
 }
 
+.read_more {
+     border: #1a1a1a solid 2px;
+     font-weight: 500;
+     display: block;
+     margin: 0 auto;
+     margin-top: 44px;
+}
 
 /** end Our  Glasses section **/
 
@@ -608,7 +615,8 @@ button {
 }
 
 .shop .titlepage .read_more {
-     color: #fff !important
+     color: #fff !important;
+     margin:10px
 }
 
 
