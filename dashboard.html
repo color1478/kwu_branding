@@ -52,16 +52,21 @@
             <h2>구매 현황</h2>
             <table class="table table-bordered">
                 <thead>
-                    <tr>
-                        <th>구매자 이름</th>
-                        <th>전화번호</th>
-                        <th>학번</th>
-                        <th>상품명 및 수량</th>
-                        <th>총 금액</th>
-                        <th>상태</th>
-                        <th>시간</th>
-                        <th>관리</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>구매자 이름</th>
+                            <th>전화번호</th>
+                            <th>학번</th>
+                            <th>상품명 및 수량</th>
+                            <th>총 금액</th>
+                            <th>배송 방법</th>
+                            <th>배송 정보</th>
+                            <th>상태</th>
+                            <th>시간</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    
                 </thead>
                 <tbody id="purchase-status"></tbody>
             </table>
@@ -95,131 +100,141 @@
         });
 
         $(document).ready(function () {
-    const salesByProduct = {}; // 상품별 판매 개수
-    let allRows = []; // 구매 현황 데이터 저장
+            const salesByProduct = {}; // 상품별 판매 개수
+            let allRows = []; // 구매 현황 데이터 저장
 
-    // Firestore 데이터 로드
-    db.collection('orders').get().then((querySnapshot) => {
-        const purchaseTbody = $('#purchase-status');
+            // Firestore 데이터 로드
+            db.collection('orders').get().then((querySnapshot) => {
+                const purchaseTbody = $('#purchase-status');
 
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const buyer = data.buyer;
-            const products = data.products;
-            const timestamp = data.timestamp?.toDate() || new Date(); // Firestore timestamp를 Date 객체로 변환
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const buyer = data.buyer;
+                    const products = data.products;
+                    const timestamp = data.timestamp?.toDate() || new Date(); // Firestore timestamp를 Date 객체로 변환
 
-            let productDetails = ''; // 상품명, 수량, 금액 표시
-            let totalPrice = 0; // 총 금액 계산
+                    // 배송 정보 처리 (필드가 존재하지 않을 경우 기본값 설정)
+                    const deliveryMethod = data.deliveryMethod || '현장 수령'; // 기본값: "현장 수령"
+                    const deliveryAddress = data.deliveryAddress || '정보 없음'; // 기본값: "정보 없음"
+                    const deliveryZip = data.deliveryZip || '정보 없음'; // 기본값: "정보 없음"
 
-            products.forEach((product) => {
-                const { name, quantity, price } = product;
-                const itemTotalPrice = price * quantity;
-                totalPrice += itemTotalPrice;
+                    let productDetails = ''; // 상품명, 수량, 금액 표시
+                    let totalPrice = 0; // 총 금액 계산
 
-                // 상품명, 수량, 금액 표시
-                productDetails += `${name} x${quantity} (₩${itemTotalPrice.toLocaleString()})<br>`;
+                    products.forEach((product) => {
+                        const { name, quantity, price } = product;
+                        const itemTotalPrice = price * quantity;
+                        totalPrice += itemTotalPrice;
 
-                // 상품별 판매 개수 집계
-                if (!salesByProduct[name]) {
-                    salesByProduct[name] = 0;
-                }
-                salesByProduct[name] += quantity;
+                        // 상품명, 수량, 금액 표시
+                        productDetails += `${name} x${quantity} (₩${itemTotalPrice.toLocaleString()})<br>`;
+
+                        // 상품별 판매 개수 집계
+                        if (!salesByProduct[name]) {
+                            salesByProduct[name] = 0;
+                        }
+                        salesByProduct[name] += quantity;
+                    });
+
+                    // 구매 현황 데이터 추가
+                    const row = `
+                        <tr data-id="${doc.id}" data-student-id="${buyer.id}">
+                            <td>${buyer.name}</td>
+                            <td>${buyer.phone}</td>
+                            <td>${buyer.id}</td>
+                            <td>${productDetails}</td>
+                            <td>₩${totalPrice.toLocaleString()}</td>
+                            <td>${deliveryMethod === 'delivery' ? '택배 배송' : '현장 수령'}</td>
+                            <td>${deliveryMethod === 'delivery' ? `주소: ${deliveryAddress}<br>우편번호: ${deliveryZip}` : 'N/A'}</td>
+                            <td><span class="badge ${data.status === '입금 완료' ? 'badge-success' : 'badge-warning'}">${data.status}</span></td>
+                            <td>${timestamp.toLocaleString()}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm update-status" data-status="입금 완료">입금 완료</button>
+                                <button class="btn btn-warning btn-sm update-status" data-status="검토중">검토중</button>
+                            </td>
+                        </tr>
+                    `;
+                    allRows.push(row);
+                    purchaseTbody.append(row);
+                });
+
+                // 굿즈별 판매 개수 업데이트
+                const goodsSalesTbody = $('#goods-sales');
+                Object.entries(salesByProduct).forEach(([product, quantity]) => {
+                    goodsSalesTbody.append(`<tr><td>${product}</td><td>${quantity}</td></tr>`);
+                });
+            }).catch((error) => {
+                console.error('Firestore 데이터 로드 실패:', error);
+                alert('데이터를 불러오는 중 문제가 발생했습니다.');
             });
 
-            // 구매 현황 데이터 추가
-            const row = `
-                <tr data-id="${doc.id}" data-student-id="${buyer.id}">
-                    <td>${buyer.name}</td>
-                    <td>${buyer.phone}</td>
-                    <td>${buyer.id}</td>
-                    <td>${productDetails}</td>
-                    <td>₩${totalPrice.toLocaleString()}</td>
-                    <td><span class="badge ${data.status === '입금 완료' ? 'badge-success' : 'badge-warning'}">${data.status}</span></td>
-                    <td>${timestamp.toLocaleString()}</td>
-                    <td>
-                        <button class="btn btn-success btn-sm update-status" data-status="입금 완료">입금 완료</button>
-                        <button class="btn btn-warning btn-sm update-status" data-status="검토중">검토중</button>
-                    </td>
-                </tr>
-            `;
-            allRows.push(row);
-            purchaseTbody.append(row);
+            // 학번 필터 이벤트
+            $('#studentFilter').on('input', function () {
+                const filterValue = $(this).val().trim();
+                const filteredRows = allRows.filter((rowHtml) => {
+                    const tempDiv = $('<div>').html(rowHtml);
+                    const studentId = tempDiv.find('tr').data('student-id');
+                    return studentId?.toString().includes(filterValue);
+                });
+
+                $('#purchase-status').empty().append(filteredRows);
+            });
+
+            // 상태 변경 이벤트
+            $('#purchase-status').on('click', '.update-status', function () {
+                const button = $(this);
+                const newStatus = button.data('status');
+                const row = button.closest('tr');
+                const docId = row.data('id');
+
+                db.collection('orders').doc(docId).update({
+                    status: newStatus
+                }).then(() => {
+                    const badge = row.find('.badge');
+                    badge
+                        .removeClass('badge-success badge-warning')
+                        .addClass(newStatus === '입금 완료' ? 'badge-success' : 'badge-warning')
+                        .text(newStatus);
+
+                    alert(`상태가 '${newStatus}'(으)로 변경되었습니다.`);
+                }).catch((error) => {
+                    console.error('상태 업데이트 실패:', error);
+                    alert('상태 업데이트에 실패했습니다.');
+                });
+            });
+
+            // 로그아웃 버튼 클릭 이벤트
+            $('#logoutButton').on('click', function () {
+                firebase.auth().signOut().then(() => {
+                    alert('로그아웃 되었습니다.');
+                    window.location.href = 'index.html'; // 로그아웃 후 이동할 페이지
+                }).catch((error) => {
+                    console.error('로그아웃 실패:', error);
+                    alert('로그아웃에 실패했습니다.');
+                });
+            });
         });
 
-        // 굿즈별 판매 개수 업데이트
-        const goodsSalesTbody = $('#goods-sales');
-        Object.entries(salesByProduct).forEach(([product, quantity]) => {
-            goodsSalesTbody.append(`<tr><td>${product}</td><td>${quantity}</td></tr>`);
-        });
-    }).catch((error) => {
-        console.error('Firestore 데이터 로드 실패:', error);
-        alert('데이터를 불러오는 중 문제가 발생했습니다.');
-    });
 
-    // 학번 필터 이벤트
-    $('#studentFilter').on('input', function () {
-        const filterValue = $(this).val().trim();
-        const filteredRows = allRows.filter((rowHtml) => {
-            const tempDiv = $('<div>').html(rowHtml);
-            const studentId = tempDiv.find('tr').data('student-id');
-            return studentId?.toString().includes(filterValue);
-        });
-
-        $('#purchase-status').empty().append(filteredRows);
-    });
-
-    // 상태 변경 이벤트
-    $('#purchase-status').on('click', '.update-status', function () {
-        const button = $(this);
-        const newStatus = button.data('status');
-        const row = button.closest('tr');
-        const docId = row.data('id');
-
-        db.collection('orders').doc(docId).update({
-            status: newStatus
-        }).then(() => {
-            const badge = row.find('.badge');
-            badge
-                .removeClass('badge-success badge-warning')
-                .addClass(newStatus === '입금 완료' ? 'badge-success' : 'badge-warning')
-                .text(newStatus);
-
-            alert(`상태가 '${newStatus}'(으)로 변경되었습니다.`);
-        }).catch((error) => {
-            console.error('상태 업데이트 실패:', error);
-            alert('상태 업데이트에 실패했습니다.');
-        });
-    });
-
-    // 로그아웃 버튼 클릭 이벤트
-    $('#logoutButton').on('click', function () {
-        firebase.auth().signOut().then(() => {
-            alert('로그아웃 되었습니다.');
-            window.location.href = 'index.html'; // 로그아웃 후 이동할 페이지
-        }).catch((error) => {
-            console.error('로그아웃 실패:', error);
-            alert('로그아웃에 실패했습니다.');
-        });
-    });
-});
 
 // 우클릭 비활성화
 document.addEventListener('contextmenu', function (event) {
-        event.preventDefault();
-        alert('우클릭은 사용할 수 없습니다.');
-    });
+    event.preventDefault();
+    alert('우클릭은 사용할 수 없습니다.');
+});
 
-    // 특정 키 조합 방지 (F12, Ctrl+Shift+I, Ctrl+U 등)
-    document.addEventListener('keydown', function (event) {
-        if (
-            event.key === 'F12' || // F12 키
-            (event.ctrlKey && event.shiftKey && event.key === 'I') || // Ctrl + Shift + I
-            (event.ctrlKey && event.key === 'U') // Ctrl + U
-        ) {
-            event.preventDefault();
-            alert('이 기능은 사용할 수 없습니다.');
-        }
-    });
+// 특정 키 조합 방지 (F12, Ctrl+Shift+I, Ctrl+U 등)
+document.addEventListener('keydown', function (event) {
+    if (
+        event.key === 'F12' || // F12 키
+        (event.ctrlKey && event.shiftKey && event.key === 'I') || // Ctrl + Shift + I
+        (event.ctrlKey && event.key === 'U') // Ctrl + U
+    ) {
+        event.preventDefault();
+        alert('이 기능은 사용할 수 없습니다.');
+    }
+});
+
     </script>
 </body>
 </html>

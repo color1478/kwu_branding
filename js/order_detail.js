@@ -6,6 +6,7 @@ $(document).ready(function () {
         const name = $('#buyerName').val().trim();
         const phone = $('#buyerPhone').val().trim();
         const id = $('#buyerId').val().trim();
+        const deliveryMethod = $('input[name="deliveryMethod"]:checked').val();
         let hasProduct = false;
 
         // 상품 수량 확인
@@ -16,8 +17,13 @@ $(document).ready(function () {
             }
         });
 
+        // 배송 정보 확인 (택배 배송일 경우)
+        const address = $('#deliveryAddress').val().trim();
+        const zip = $('#deliveryZip').val().trim();
+        const deliveryComplete = deliveryMethod === 'pickup' || (address && zip);
+
         // 버튼 활성화/비활성화
-        if (name && phone && id && hasProduct) {
+        if (name && phone && id && hasProduct && deliveryComplete) {
             $('#reviewOrder').prop('disabled', false);
         } else {
             $('#reviewOrder').prop('disabled', true);
@@ -44,7 +50,20 @@ $(document).ready(function () {
     });
 
     // 구매자 정보 입력 시 이벤트
-    $('#buyerName, #buyerPhone, #buyerId').on('input', function () {
+    $('#buyerName, #buyerPhone, #buyerId, #deliveryAddress, #deliveryZip').on('input', function () {
+        checkFormCompletion();
+    });
+
+    // 수령 방법 변경 시 이벤트
+    $('input[name="deliveryMethod"]').on('change', function () {
+        const deliveryMethod = $(this).val();
+
+        if (deliveryMethod === 'delivery') {
+            $('.delivery-info').fadeIn();
+        } else {
+            $('.delivery-info').fadeOut();
+        }
+
         checkFormCompletion();
     });
 
@@ -75,6 +94,9 @@ $(document).ready(function () {
         const buyerName = $('#buyerName').val().trim();
         const buyerPhone = $('#buyerPhone').val().trim();
         const buyerId = $('#buyerId').val().trim();
+        const deliveryMethod = $('input[name="deliveryMethod"]:checked').val();
+        const deliveryAddress = $('#deliveryAddress').val().trim();
+        const deliveryZip = $('#deliveryZip').val().trim();
 
         // 주문 데이터를 전역 변수에 저장
         orderData = {
@@ -85,6 +107,9 @@ $(document).ready(function () {
             },
             products: products,
             totalAmount: finalAmount,
+            deliveryMethod,
+            deliveryAddress: deliveryMethod === 'delivery' ? deliveryAddress : null,
+            deliveryZip: deliveryMethod === 'delivery' ? deliveryZip : null,
             status: '검토중', // 주문 상태를 "검토중"으로 설정
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         };
@@ -96,6 +121,8 @@ $(document).ready(function () {
             <p>구매자 이름: ${buyerName}</p>
             <p>전화번호: ${buyerPhone}</p>
             <p>학번: ${buyerId}</p>
+            <p>수령 방법: ${deliveryMethod === 'pickup' ? '현장 수령' : '택배 배송'}</p>
+            ${deliveryMethod === 'delivery' ? `<p>배송지: ${deliveryAddress}</p><p>우편번호: ${deliveryZip}</p>` : ''}
         `);
 
         $('#orderModal').fadeIn();

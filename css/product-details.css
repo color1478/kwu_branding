@@ -72,3 +72,14 @@ ul.list-group li {
     color: #333;
     font-size: 14px;
 }
+
+.delivery-method {
+    margin: 20px 0;
+}
+
+.delivery-info {
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}

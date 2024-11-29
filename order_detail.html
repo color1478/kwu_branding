@@ -54,6 +54,34 @@
             </div>
         </div>
 
+        <!-- 수령 방법 -->
+    <div class="delivery-method">
+        <h3>수령 방법</h3>
+        <strong>*우니 인형 선택 시, 택배 배송으로 필수 선택*</strong>
+        <div class="form-group">
+            <input type="radio" id="pickup" name="deliveryMethod" value="pickup" checked>
+            <label for="pickup">현장 수령</label>
+        </div>
+        <div class="form-group">
+            <input type="radio" id="delivery" name="deliveryMethod" value="delivery">
+            <label for="delivery">택배 배송</label>
+        </div>
+    </div>
+
+    <!-- 배송 정보 입력 (초기 비활성화 상태) -->
+    <div class="delivery-info" style="display: none;">
+        <h3>배송 정보</h3>
+        <div class="form-group">
+            <label for="deliveryAddress">주소</label>
+            <input type="text" id="deliveryAddress" placeholder="주소를 입력하세요">
+        </div>
+        <div class="form-group">
+            <label for="deliveryZip">우편번호</label>
+            <input type="text" id="deliveryZip" placeholder="우편번호를 입력하세요">
+        </div>
+    </div>
+
+
         <!-- 상품 리스트 -->
         <div class="product-list-grid">
             <!-- 아크릴 키링 -->
