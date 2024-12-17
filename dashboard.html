@@ -390,7 +390,6 @@
                     const filteredRows = allRows.filter((row) => row.name.includes(filterValue));
                     updatePurchaseTable(filteredRows);
                 });
-
                 // 최신순 정렬
                 $('#sortNewest').on('click', function () {
                     const sortedRows = [...allRows].sort(
@@ -450,7 +449,6 @@
                     };
                 }
 
-
                 function loadAllOrders() {
                     db.collection('orders')
                         .get()
@@ -465,15 +463,18 @@
                                 allRows.push(rowData);
                             });
 
-                            // 데이터 정렬 (오래된 순)
-                            const sortedRows = allRows.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+                            // 시간 순으로 정렬 (오래된 순)
+                            allRows.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
-                            // 구매 현황 및 요약 업데이트
-                            updatePurchaseTable(sortedRows);
-                            updateSummary(sortedRows);
+                            // 고정 인덱스 부여
+                            allRows.forEach((row, index) => {
+                                row.fixedIndex = index + 1; // 고유 인덱스 번호 (1부터 시작)
+                            });
 
-                            // 품목 판매 개수 업데이트
-                            updateProductStats(sortedRows);
+                            // 테이블 및 요약 업데이트
+                            updatePurchaseTable(allRows);
+                            updateSummary(allRows);
+                            updateProductStats(allRows);
                         })
                         .catch((error) => {
                             console.error('Firestore 데이터 로드 실패:', error);
@@ -494,10 +495,10 @@
                 }
 
                 // 테이블 행 생성
-                function createTableRow(rowData, index) {
+                function createTableRow(rowData) {
                     return `
                         <tr data-id="${rowData.id}" data-student-id="${rowData.studentId}">
-                            <td>${index + 1}</td> <!-- 인덱스 번호 -->
+                            <td>${rowData.fixedIndex}</td> <!-- 고정된 번호 -->
                             <td>${rowData.name}</td>
                             <td>${rowData.phone}</td>
                             <td>${rowData.studentId}</td>
@@ -517,12 +518,13 @@
                                     <button class="btn btn-success btn-sm update-status" data-status="입금 완료">입금 완료</button>
                                     <button class="btn btn-primary btn-sm update-status" data-status="배송중">배송중</button>
                                     <button class="btn btn-secondary btn-sm update-status" data-status="배송완료">배송완료</button>
-                                     <button class="btn btn-danger btn-sm cancel-order">구매취소</button>
+                                    <button class="btn btn-danger btn-sm cancel-order">구매취소</button>
                                 </div>
                             </td>
                         </tr>
                     `;
                 }
+
                 
                 function updatePurchaseTable(rows) {
                     const purchaseTbody = $('#purchase-status');
